@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 { id: 'a30', name: "Samsung Galaxy A16 128GB", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320803/a31.jpg", price: "82 500 FCFA", category: "telephones_tablettes" },
 { id: 'a32', name: "Itel A90 128GB", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320804/a32.jpg", price: "51 000 FCFA", category: "telephones_tablettes" },
 { id: 'a33', name: "Infinix Smart9 128GB", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320804/a33.jpg", price: "50 000 FCFA", category: "telephones_tablettes" },
-{ id: 'a34', name: "Redmi Note 14", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320807/a34.jpgg", price: "130 000 FCFA", category: "telephones_tablettes" },
+{ id: 'a34', name: "Redmi Note 14", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320807/a34.jpg", price: "130 000 FCFA", category: "telephones_tablettes" },
 { id: 'a35', name: "Itel A06", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320809/a35.jpg", price: "42 500 FCFA", category: "telephones_tablettes" },
         
 // Écouteurs & Casques 29
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 { id: 'b15', name: "Samsung Galaxy 2020", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320835/b15.jpg", price: "3 500 FCFA", category: "ecouteurs_casques" },
 { id: 'b16', name: "Oraimo Air 12 Pro", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320841/b16.jpg", price: "3 500 FCFA", category: "ecouteurs_casques" },
 { id: 'b17', name: "JBL i22", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320842/b17.jpg", price: "5 000 FCFA", category: "ecouteurs_casques" },
-{ id: 'b18', name: "JBL B29", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320842/b18.jpgg", price: "3 500 FCFA", category: "ecouteurs_casques" },
+{ id: 'b18', name: "JBL B29", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320842/b18.jpg", price: "3 500 FCFA", category: "ecouteurs_casques" },
 { id: 'b19', name: "Wireless K53", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320842/b19.jpg", price: "5 000 FCFA", category: "ecouteurs_casques" },
 { id: 'b20', name: "Wireless Q3", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320844/b20.jpg", price: "4 500 FCFA", category: "ecouteurs_casques" },
 { id: 'b21', name: "Ecouteur filaire LG RG-56", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320845/b21.jpg", price: "1 000 FCFA", category: "ecouteurs_casques" },
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 { id: 'i27', name: "Villaon V210 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321253/i27.jpg", price: "6 000 FCFA", category: "telephones_touches" },
 { id: 'i28', name: "Opus S124 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321252/i28.jpg", price: "5 000 FCFA", category: "telephones_touches" },
 { id: 'i29', name: "Oking it2160 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321252/i29.jpg", price: "5 000 FCFA", category: "telephones_touches" },
-{ id: 'i30', name: "Tecno T302 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321252/i30.jpgg", price: "7 000 FCFA", category: "telephones_touches" },
+{ id: 'i30', name: "Tecno T302 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321252/i30.jpg", price: "7 000 FCFA", category: "telephones_touches" },
 { id: 'i31', name: "Opus S123 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321253/i31.jpg", price: "5 000 FCFA", category: "telephones_touches" },
 { id: 'i32', name: "Oking OK95mini touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321256/i32.jpg", price: "7 000 FCFA", category: "telephones_touches" },
 { id: 'i33', name: "Tecno T663 touche", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764321257/i33.jpg", price: "13 000 FCFA", category: "telephones_touches" },
