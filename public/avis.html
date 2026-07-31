@@ -4,189 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avis Clients - Bobo Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: var(--light-green-tint);
-        }
-
-        .avis-page-header {
-            background-color: var(--primary-green);
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.35);
-            border-bottom: 1px solid var(--dark-green-accent);
-        }
-        
-        .avis-page-header .back-button {
-            position: absolute;
-            left: 15px;
-            color: var(--white);
-            font-size: 1.5rem;
-            text-decoration: none;
-            padding: 5px;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .avis-page-header .back-button:hover {
-            color: rgba(255, 255, 255, 0.8);
-            transform: translateX(-3px);
-        }
-        
-        .avis-page-header .avis-page-title {
-            color: var(--white);
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-align: center;
-            flex-grow: 1;
-            margin: 0;
-        }
-
-        .avis-main-container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-light);
-        }
-
-        .avis-main-container h2 {
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .avis-list {
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-light);
-            list-style: none;
-            padding: 0;
-        }
-
-        .avis-item {
-            background-color: var(--light-green-tint);
-            border-left: 4px solid var(--primary-green);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            color: var(--text-dark);
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .avis-item .avis-date {
-            font-size: 0.85rem;
-            color: var(--text-medium);
-            margin-top: 5px;
-            display: block;
-            text-align: right;
-        }
-
-        .avis-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 15px;
-            border-top: 1px solid var(--border-light);
-        }
-        
-        .avis-form h3 {
-            color: var(--text-dark);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-
-        .avis-form input,
-        .avis-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 50px;
-            color: var(--text-dark);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .avis-form textarea {
-            min-height: 100px;
-        }
-
-        .avis-form input:focus,
-        .avis-form textarea:focus {
-            border-color: var(--primary-green);
-            box-shadow: 0 0 0 3px rgba(59, 141, 108, 0.3);
-            outline: none;
-        }
-
-        .avis-submit-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--accent-orange);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.15rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .avis-submit-btn:hover {
-            background-color: var(--hover-orange);
-        }
-
-        .no-avis-message {
-            text-align: center;
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            padding: 20px;
-        }
-    </style>
 </head>
 <body>
-    <header class="avis-page-header">
-        <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
-        <h1 class="avis-page-title">Avis des Clients</h1>
+    <header class="cart-page-header">
+        <a href="index.html" class="back-button" aria-label="Retour à l'accueil"><i class="fas fa-arrow-left"></i></a>
+        <h1 class="cart-page-title">Avis des Clients</h1>
     </header>
 
-    <main class="avis-main-container">
+    <main class="avis-main-container page-fade-in">
+        <h2 class="avis-section-title"><i class="fas fa-comments"></i> Ce que disent nos clients</h2>
+
         <ul class="avis-list" id="avis-list">
-            <div class="no-avis-message">
-                <i class="fas fa-comments" style="font-size: 2em; margin-bottom: 10px;"></i>
-                <p>Aucun avis n'a encore été publié.</p>
-                <p>Soyez le premier à laisser le vôtre !</p>
-            </div>
+            <!-- Skeletons affichés pendant le chargement -->
+            <li class="avis-skeleton">
+                <div class="skeleton-line w-40"></div>
+                <div class="skeleton-line w-90"></div>
+                <div class="skeleton-line w-70"></div>
+            </li>
+            <li class="avis-skeleton">
+                <div class="skeleton-line w-40"></div>
+                <div class="skeleton-line w-90"></div>
+                <div class="skeleton-line w-70"></div>
+            </li>
         </ul>
 
-        <form class="avis-form" id="avis-form">
-            <h3>Laissez votre avis</h3>
-            <input type="text" id="nom-input" placeholder="Votre nom" required>
-            <textarea id="avis-input" placeholder="Écrivez votre avis ici..." required></textarea>
-            <input type="number" id="note-input" placeholder="Votre note (1-5)" min="1" max="5" required>
-            <button type="submit" class="avis-submit-btn">Envoyer mon avis</button>
+        <form class="avis-form" id="avis-form" novalidate>
+            <h3><i class="fas fa-pen"></i> Laissez votre avis</h3>
+
+            <div class="avis-field">
+                <label for="nom-input">Votre nom</label>
+                <input type="text" id="nom-input" placeholder="Ex : Awa K." maxlength="50" required>
+            </div>
+
+            <div class="avis-field">
+                <label>Votre note</label>
+                <div class="star-rating" id="star-rating">
+                    <input type="radio" id="star5" name="note" value="5"><label for="star5" title="5 étoiles"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star4" name="note" value="4"><label for="star4" title="4 étoiles"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star3" name="note" value="3" checked><label for="star3" title="3 étoiles"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star2" name="note" value="2"><label for="star2" title="2 étoiles"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star1" name="note" value="1"><label for="star1" title="1 étoile"><i class="fas fa-star"></i></label>
+                </div>
+            </div>
+
+            <div class="avis-field">
+                <label for="avis-input">Votre avis</label>
+                <textarea id="avis-input" placeholder="Dites-nous ce que vous avez pensé de votre commande..." maxlength="400" required></textarea>
+                <div class="char-counter"><span id="char-count">0</span>/400</div>
+            </div>
+
+            <button type="submit" class="avis-submit-btn" id="avis-submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                <span>Envoyer mon avis</span>
+            </button>
         </form>
     </main>
 
+    <nav class="bottom-menu">
+        <a href="index.html" class="menu-item">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="panier.html" class="menu-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Panier</span>
+            <span class="cart-badge" id="cart-item-count">0</span>
+        </a>
+        <a href="avis.html" class="menu-item active">
+            <i class="fas fa-star"></i>
+            <span>Avis</span>
+        </a>
+    </nav>
+
+    <script src="common.js"></script>
     <script>
         const avisForm = document.getElementById('avis-form');
         const nomInput = document.getElementById('nom-input');
         const avisInput = document.getElementById('avis-input');
-        const noteInput = document.getElementById('note-input');
+        const charCount = document.getElementById('char-count');
         const avisList = document.getElementById('avis-list');
-        const noAvisMessage = document.querySelector('.no-avis-message');
+        const submitBtn = document.getElementById('avis-submit-btn');
+
+        // --- Compteur de caractères en temps réel ---
+        avisInput.addEventListener('input', () => {
+            charCount.textContent = avisInput.value.length;
+        });
+
+        // Note : showToast() est fournie par common.js
+
+        function renderStars(note) {
+            const rounded = Math.round(Number(note)) || 0;
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                html += `<i class="fas fa-star ${i <= rounded ? '' : 'star-off'}"></i>`;
+            }
+            return html;
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
 
         async function chargerAvis() {
             try {
@@ -195,25 +120,37 @@
 
                 avisList.innerHTML = "";
 
-                if (avis.length === 0) {
-                    if (noAvisMessage) noAvisMessage.style.display = "block";
+                if (!avis || avis.length === 0) {
+                    avisList.innerHTML = `
+                        <div class="no-avis-message">
+                            <i class="fas fa-comments"></i>
+                            <p>Aucun avis n'a encore été publié.</p>
+                            <p>Soyez le premier à laisser le vôtre !</p>
+                        </div>`;
                     return;
-                } else {
-                    if (noAvisMessage) noAvisMessage.style.display = "none";
                 }
 
-                avis.forEach(a => {
+                avis.forEach((a, index) => {
                     const li = document.createElement("li");
                     li.classList.add("avis-item");
+                    li.style.animationDelay = `${Math.min(index, 8) * 0.05}s`;
                     li.innerHTML = `
-                        <strong>${a.nom}</strong> ⭐${a.note}<br>
-                        ${a.avis}
-                        <span class="avis-date">${new Date(a.date).toLocaleDateString()}</span>
+                        <div class="avis-item-header">
+                            <span class="avis-item-name">${escapeHtml(a.nom)}</span>
+                            <span class="avis-item-stars">${renderStars(a.note)}</span>
+                        </div>
+                        <p class="avis-item-text">${escapeHtml(a.avis)}</p>
+                        <span class="avis-date">${new Date(a.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                     `;
                     avisList.appendChild(li);
                 });
             } catch (error) {
                 console.error("Erreur lors du chargement des avis :", error);
+                avisList.innerHTML = `
+                    <div class="no-avis-message">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <p>Impossible de charger les avis pour le moment.</p>
+                    </div>`;
             }
         }
 
@@ -221,11 +158,21 @@
             avisForm.addEventListener("submit", async (e) => {
                 e.preventDefault();
 
+                const noteChecked = avisForm.querySelector('input[name="note"]:checked');
+
+                if (!nomInput.value.trim() || !avisInput.value.trim() || !noteChecked) {
+                    showToast("Merci de remplir tous les champs.", "error");
+                    return;
+                }
+
                 const avisData = {
-                    nom: nomInput.value,
-                    avis: avisInput.value,
-                    note: noteInput.value
+                    nom: nomInput.value.trim(),
+                    avis: avisInput.value.trim(),
+                    note: noteChecked.value
                 };
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="spinner"></span><span>Envoi en cours...</span>`;
 
                 try {
                     const res = await fetch("/submit-avis", {
@@ -235,16 +182,26 @@
                     });
 
                     const data = await res.json();
-                    alert(data.message);
+                    showToast(data.message || "Merci pour votre avis !", "success");
 
                     avisForm.reset();
+                    charCount.textContent = "0";
+                    document.getElementById('star3').checked = true;
                     chargerAvis();
                 } catch (error) {
                     console.error("Erreur lors de l'envoi de l'avis :", error);
+                    showToast("Une erreur est survenue. Réessayez.", "error");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `<i class="fas fa-paper-plane"></i><span>Envoyer mon avis</span>`;
                 }
             });
         }
 
+        chargerAvis();
+    </script>
+</body>
+</html>
         chargerAvis();
     </script>
 </body>
