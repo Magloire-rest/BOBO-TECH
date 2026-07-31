@@ -433,6 +433,30 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
     applyFilters();
 
+    /**
+     * Active une catégorie à partir du hash d'URL (ex: index.html#promo).
+     * Utilisé par l'onglet "Promo du jour" du menu du bas : que l'on
+     * arrive depuis une autre page ou que l'on soit déjà sur l'accueil,
+     * cela sélectionne l'onglet catégorie correspondant et filtre.
+     */
+    const activateCategoryFromHash = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash) return;
+        const matchingItem = document.querySelector(`.category-item[data-category="${hash}"]`);
+        if (!matchingItem) return;
+
+        categoryItems.forEach(cat => cat.classList.remove('active'));
+        matchingItem.classList.add('active');
+        currentActiveCategory = hash;
+        applyFilters();
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        matchingItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    };
+
+    activateCategoryFromHash();
+    window.addEventListener('hashchange', activateCategoryFromHash);
+
     categoryItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
