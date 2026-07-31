@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Panier - e-commerce</title>
+    <title>Mon Panier - Bobo Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="cart-page-header">
@@ -15,7 +19,7 @@
         <h1 class="cart-page-title">Mon Panier</h1>
     </header>
 
-    <main>
+    <main class="page-fade-in">
         <div class="delivery-banner">
             <i class="fas fa-truck-fast"></i> Livraison GRATUITE à Bobo-Dioulasso !
         </div>
@@ -56,8 +60,7 @@
             </select>
         </div>
 
-
-        <div class="cart-summary">
+        <div class="cart-summary" id="cart-summary">
             <div class="cart-total">
                 <span>Total estimé :</span>
                 <span id="cart-total-price">0 FCFA</span>
@@ -65,8 +68,10 @@
             <button class="checkout-whatsapp-btn" id="checkout-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i> Passer ma commande via WhatsApp
             </button>
+            <button class="clear-cart-btn" id="clear-cart-btn">
+                <i class="fas fa-trash-alt"></i> Vider le panier
+            </button>
         </div>
-
     </main>
 
     <nav class="bottom-menu">
@@ -74,93 +79,57 @@
             <i class="fas fa-home"></i>
             <span>Accueil</span>
         </a>
-        <a href="https://wa.me/22667472504" class="menu-item" target="_blank">
-            <i class="fas fa-comments"></i>
-            <span>Messagerie</span>
-        </a>
         <a href="panier.html" class="menu-item active">
             <i class="fas fa-shopping-cart"></i>
             <span>Panier</span>
             <span class="cart-badge" id="cart-item-count">0</span>
         </a>
+        <a href="avis.html" class="menu-item">
+            <i class="fas fa-star"></i>
+            <span>Avis</span>
+        </a>
     </nav>
 
-    <script src="script.js"></script>
+    <script src="common.js"></script>
     <script>
-        // Ce script est pour la page panier.html
         document.addEventListener('DOMContentLoaded', () => {
-            const whatsappNumber = '22667472504';
-
-            // Les mêmes fonctions de gestion du panier que sur index.html
-            const getCart = () => {
-                try {
-                    return JSON.parse(localStorage.getItem('cart')) || [];
-                } catch (e) {
-                    console.error("Erreur de parsing du panier du Local Storage:", e);
-                    return [];
-                }
-            };
-
-            const saveCart = (cart) => {
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount(); // Mettre à jour le badge après chaque sauvegarde
-            };
-
-            const updateCartCount = () => {
-                const cart = getCart();
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                const cartCountElement = document.getElementById('cart-item-count');
-                if (cartCountElement) {
-                    cartCountElement.textContent = totalItems;
-                    if (totalItems > 0) {
-                        cartCountElement.classList.add('visible');
-                    } else {
-                        cartCountElement.classList.remove('visible');
-                    }
-                }
-            };
-
-            const calculateTotalPrice = (cart) => {
-                let total = 0;
-                cart.forEach(item => {
-                    const price = parseFloat(item.price.replace(' FCFA', '').replace(/\s/g, ''));
-                    total += price * item.quantity;
-                });
-                return total.toLocaleString('fr-FR') + ' FCFA';
-            };
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartSummary = document.getElementById('cart-summary');
+            const deliveryLocationSection = document.querySelector('.delivery-location-section');
+            const cartTotalPriceEl = document.getElementById('cart-total-price');
+            const checkoutWhatsappBtn = document.getElementById('checkout-whatsapp-btn');
+            const clearCartBtn = document.getElementById('clear-cart-btn');
+            const deliveryLocationSelect = document.getElementById('delivery-location');
 
             const renderCartItems = () => {
                 const cart = getCart();
-                const cartItemsContainer = document.getElementById('cart-items-container');
-                const emptyCartMessage = document.getElementById('empty-cart-message');
-                const cartSummary = document.querySelector('.cart-summary');
-                const deliveryLocationSection = document.querySelector('.delivery-location-section');
 
                 if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = ''; // Nettoyer pour ne pas dupliquer le message
+                    cartItemsContainer.innerHTML = '';
+                    cartItemsContainer.appendChild(emptyCartMessage);
                     emptyCartMessage.style.display = 'block';
                     cartSummary.style.display = 'none';
                     deliveryLocationSection.style.display = 'none';
-                    document.getElementById('cart-total-price').textContent = '0 FCFA';
+                    cartTotalPriceEl.textContent = '0 FCFA';
                     return;
-                } else {
-                    emptyCartMessage.style.display = 'none';
-                    cartSummary.style.display = 'block';
-                    deliveryLocationSection.style.display = 'block';
                 }
+
+                cartSummary.style.display = 'block';
+                deliveryLocationSection.style.display = 'block';
 
                 let itemsHtml = '';
                 cart.forEach(item => {
                     itemsHtml += `
                         <div class="cart-item" data-product-id="${item.id}">
-                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image" loading="lazy">
                             <div class="cart-item-details">
                                 <div class="cart-item-name">${item.name}</div>
                                 <div class="cart-item-price">${item.price}</div>
                                 <div class="quantity-controls">
-                                    <button class="quantity-btn decrease-quantity-btn" data-product-id="${item.id}">-</button>
-                                    <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-product-id="${item.id}">
-                                    <button class="quantity-btn increase-quantity-btn" data-product-id="${item.id}">+</button>
+                                    <button class="quantity-btn decrease-quantity-btn" data-product-id="${item.id}" aria-label="Diminuer la quantité">-</button>
+                                    <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-product-id="${item.id}" aria-label="Quantité">
+                                    <button class="quantity-btn increase-quantity-btn" data-product-id="${item.id}" aria-label="Augmenter la quantité">+</button>
                                 </div>
                             </div>
                             <button class="remove-item-btn" data-product-id="${item.id}" aria-label="Supprimer ${item.name}">
@@ -170,17 +139,15 @@
                     `;
                 });
                 cartItemsContainer.innerHTML = itemsHtml;
-                document.getElementById('cart-total-price').textContent = calculateTotalPrice(cart);
+                cartTotalPriceEl.textContent = calculateCartTotal(cart);
 
-                // Attach event listeners for quantity controls and remove buttons
                 cartItemsContainer.querySelectorAll('.increase-quantity-btn').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const productId = e.target.closest('button').getAttribute('data-product-id');
-                        const currentCart = getCart();
-                        const itemIndex = currentCart.findIndex(item => item.id === productId);
-                        if (itemIndex > -1) {
-                            currentCart[itemIndex].quantity++;
-                            saveCart(currentCart);
+                        const cart = getCart();
+                        const item = cart.find(i => i.id === productId);
+                        if (item) {
+                            updateCartItemQuantity(productId, item.quantity + 1);
                             renderCartItems();
                         }
                     });
@@ -189,13 +156,10 @@
                 cartItemsContainer.querySelectorAll('.decrease-quantity-btn').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const productId = e.target.closest('button').getAttribute('data-product-id');
-                        const currentCart = getCart();
-                        const itemIndex = currentCart.findIndex(item => item.id === productId);
-                        if (itemIndex > -1) {
-                            if (currentCart[itemIndex].quantity > 1) {
-                                currentCart[itemIndex].quantity--;
-                            }
-                            saveCart(currentCart);
+                        const cart = getCart();
+                        const item = cart.find(i => i.id === productId);
+                        if (item && item.quantity > 1) {
+                            updateCartItemQuantity(productId, item.quantity - 1);
                             renderCartItems();
                         }
                     });
@@ -204,49 +168,43 @@
                 cartItemsContainer.querySelectorAll('.quantity-input').forEach(input => {
                     input.addEventListener('change', (e) => {
                         const productId = e.target.getAttribute('data-product-id');
-                        let newQuantity = parseInt(e.target.value);
-                        if (isNaN(newQuantity) || newQuantity < 1) {
-                            newQuantity = 1; // Default to 1 if invalid
-                        }
-                        const currentCart = getCart();
-                        const itemIndex = currentCart.findIndex(item => item.id === productId);
-                        if (itemIndex > -1) {
-                            currentCart[itemIndex].quantity = newQuantity;
-                            saveCart(currentCart);
-                            renderCartItems();
-                        }
+                        let newQuantity = parseInt(e.target.value, 10);
+                        if (isNaN(newQuantity) || newQuantity < 1) newQuantity = 1;
+                        updateCartItemQuantity(productId, newQuantity);
+                        renderCartItems();
                     });
                 });
 
                 cartItemsContainer.querySelectorAll('.remove-item-btn').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const productId = e.target.closest('button').getAttribute('data-product-id');
-                        let currentCart = getCart();
-                        currentCart = currentCart.filter(item => item.id !== productId);
-                        saveCart(currentCart);
-                        renderCartItems();
+                        const itemEl = cartItemsContainer.querySelector(`.cart-item[data-product-id="${productId}"]`);
+                        if (itemEl) {
+                            // Petite animation de sortie avant suppression réelle
+                            itemEl.classList.add('removing');
+                            setTimeout(() => {
+                                removeFromCart(productId);
+                                renderCartItems();
+                            }, 220);
+                        } else {
+                            removeFromCart(productId);
+                            renderCartItems();
+                        }
                     });
                 });
             };
 
-            // Initial render when page loads
-            renderCartItems();
-            updateCartCount(); // Assure que le badge est à jour au chargement de la page panier
-
-            // Handle checkout via WhatsApp
-            const checkoutWhatsappBtn = document.getElementById('checkout-whatsapp-btn');
-            const deliveryLocationSelect = document.getElementById('delivery-location');
-
             checkoutWhatsappBtn.addEventListener('click', () => {
                 const cart = getCart();
                 if (cart.length === 0) {
-                    alert("Votre panier est vide. Veuillez ajouter des produits avant de commander.");
+                    showToast("Votre panier est vide.", "error");
                     return;
                 }
 
                 const selectedLocation = deliveryLocationSelect.value;
                 if (!selectedLocation) {
-                    alert("Veuillez sélectionner un lieu de livraison.");
+                    showToast("Veuillez sélectionner un lieu de livraison.", "error");
+                    deliveryLocationSelect.focus();
                     return;
                 }
 
@@ -254,19 +212,21 @@
                 cart.forEach(item => {
                     whatsappMessage += `- ${item.name} (Qté: ${item.quantity})\n`;
                 });
-
                 whatsappMessage += `\nLieu de livraison : ${selectedLocation}`;
-                whatsappMessage += `\nTotal estimé : ${calculateTotalPrice(cart)}`;
+                whatsappMessage += `\nTotal estimé : ${calculateCartTotal(cart)}`;
                 whatsappMessage += `\n\nMerci !`;
 
-                window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-                
-                // Optionnel: Vider le panier après la commande
-                // if (confirm("Votre commande a été envoyée ! Voulez-vous vider votre panier ?")) {
-                //     saveCart([]);
-                //     renderCartItems();
-                // }
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
             });
+
+            clearCartBtn.addEventListener('click', () => {
+                if (getCart().length === 0) return;
+                clearCart();
+                renderCartItems();
+                showToast("Panier vidé.", "default");
+            });
+
+            renderCartItems();
         });
     </script>
 </body>
