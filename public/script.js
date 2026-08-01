@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const allProductsData = [
 
         // Téléphones & Tablettes 35
-        { id: 'a1', name: "Tecno Camon 40 pro 265GB ", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320713/a1.jpg", price: "150 000 FCFA", category: "telephones_tablettes" },
-        { id: 'a2', name: "Redmi A3", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320596/a2.jpg", price: "60 000 FCFA", category: "telephones_tablettes" },
+        { id: 'a1', name: "Tecno Camon 50 pro 256GB", image: "https://res.cloudinary.com/compressees/IMG_8976_ktrpdk", price: "210000 FCFA", category: "telephones_tablettes" },
+        { id: 'a2', name: "Redmi A7 pro 128GB" , image: "https://res.cloudinary.com/compressees/IMG_8982_zsiugv", price: "75 000 FCFA", category: "telephones_tablettes" },
         { id: 'a3', name: "Samsung Galaxy A25 5G", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320733/a3.jpg", price: "160 000 FCFA", category: "telephones_tablettes" },
         { id: 'a4', name: "Tecno Camon 40", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320733/a4.jpg", price: "130 000 FCFA", category: "telephones_tablettes" },
         { id: 'a5', name: "Redmi Note 14", image: "https://res.cloudinary.com/dzy6t8hky/image/upload/v1764320733/a5.jpg", price: "105 000 FCFA", category: "telephones_tablettes" },
